@@ -14,7 +14,7 @@ This example uses a nodejs server, so it requires nodejs. In this directory `yar
 
 ## Other Servers
 
-Configuration of a proxy with request rewrite is specific to each web server technology, but most of them provide this feature.
+Configuration of a proxy with request rewrite is specific to each web server or load balancer technology, but most of them provide this feature one way or another.
 
 ## Cookies and SSL
 This works as expected on Safari over HTTP, but Chrome for Mac will still be picky about secure cookies, so required, `ASP.NET_SessionId` and `WFAuthCookie` will not be set,

@@ -24,7 +24,9 @@ app.use(
     logLevel: "warn",
     secure: false, // this is a test / POC, so it doesn't need to be secure. 
     onProxyReq: (proxyReq, req, res) => {
-      // set header, which is an experimental flag Decisions can read to embed the host site in traffic from the embedded UI.
+      // set a special header, which is an experimental flag Decisions can read to embed the host site's URL the embedded UI,
+      // so network traffic from the Decisions form continues to go through the host/proxy and not be CORS.
+      // if you need to try this, you will currently have to ask Decisions for a patch for your version.
       proxyReq.setHeader("x-proxied-from", req.headers.host);
     },
   })
