@@ -9,12 +9,17 @@
 <body>
 
     <h1>Testing Proxy to Embedded Decisions Form</h1>
-    <p>Avoid cross-domain issues altogether by passing requests through the host site's webserver.</p>
+    <p>
+      Avoid cross-domain issues altogether by passing requests through the host site's webserver. This is just a development demonstration,
+      and configuration will depend on the type of server you are hosting your site on.
+      Here, we're using a node server on a mac-mini, proxying requests to a windows machine were Decisions is hosted,
+      with some host-file modifications on both machines to make HTTPS happier.
+    </p>
     <!-- <iframe src="http://192.168.1.3/decisions/Primary/H/?FlowId=1939dd85-88b8-11eb-b6c4-e4b97ae0eb53&&sessionid=NS-6bb14165-88b9-11eb-b6c4-e4b97ae0eb53&ForceFormat=true&Location=TopLeft&Chrome=Off&SizeX=100%25&SizeY=100%25"
     width=700 height=500 sandbox="allow-scripts allow-same-origin"/> -->
 
     <iframe
-      src="http://localhost:3000/decisions/Primary/H/?FlowId=1939dd85-88b8-11eb-b6c4-e4b97ae0eb53&&sessionid=NS-6bb14165-88b9-11eb-b6c4-e4b97ae0eb53&ForceFormat=true&Location=TopLeft&Chrome=Off&SizeX=100%25&SizeY=100%25"
+      src="https://mac-mini:3443/decisions/Primary/H/?FlowId=1939dd85-88b8-11eb-b6c4-e4b97ae0eb53&&sessionid=NS-6bb14165-88b9-11eb-b6c4-e4b97ae0eb53&ForceFormat=true&Location=TopLeft&Chrome=Off&SizeX=100%25&SizeY=100%25"
       width="800"
       height="500"
     />
