@@ -16,6 +16,11 @@ This example uses a nodejs server, so it requires nodejs. In this directory `yar
 
 Configuration of a proxy with request rewrite is specific to each web server or load balancer technology, but most of them provide this feature one way or another.
 
+The key elements of this are 
+1. Catch traffic to a specific path in the host site and redirect it to your decisions instance.
+2. Rewrite the URLs so when the request goes to Decisions, it looks same-origin to decisions, but when it reaches the host site, it looks same origin to the host site.
+3. Add the `x-proxied-from` header - this allows the Decisions UI to render in a way that passes all HTTP traffic through the host site, avoiding cross-domain issues.
+
 ## Cookies and SSL
 This works as expected on Safari over HTTP, but Chrome for Mac will still be picky about secure cookies, so required, `ASP.NET_SessionId` and `WFAuthCookie` will not be set,
 unless you have HTTPS/SSL on both the host site/proxy and the [Decisions server](https://documentation.decisions.com/docs/configuring-the-server-for-ssl-https),
