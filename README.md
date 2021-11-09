@@ -6,9 +6,14 @@ By passing Decisions traffic through a proxy, a Decisions form can be loaded in 
 that appears to be same-domain, avoiding cross-domain concerns.
 
 _(NOTE: The "x-proxied-from" header in this example is currently experimental, and requires a patch to 
-Decisions 6.x web-host layer.)_
+Decisions web-host layer.
 
-## To Set Up
+It's scheduled for 7.10.
+)_
+
+
+
+## To Set Up This Example
 
 This example uses a nodejs server, so it requires nodejs. In this directory `yarn` or `npm install`, then `yarn start` or `npm start`.
 
