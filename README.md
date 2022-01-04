@@ -11,8 +11,6 @@ Decisions web-host layer.
 It's scheduled for 7.10.
 )_
 
-
-
 ## To Set Up This Example
 
 This example uses a nodejs server, so it requires nodejs. In this directory `yarn` or `npm install`, then `yarn start` or `npm start`.

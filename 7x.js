@@ -16,7 +16,7 @@ const credentials = { key: privateKey, cert: certificate };
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 const proxyTestPath = '/decisions'; 
-const actualPathBase = '/d-7';
+const actualPathBase = '';
 
 app.use(
   "/decisions", // catch all traffic to this-site/decisions
