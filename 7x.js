@@ -7,14 +7,12 @@ const privateKey = fs.readFileSync("server.key", "utf8");
 const certificate = fs.readFileSync("server.cert", "utf8");
 const app = express();
 
-const useHttps = false;
+const useHttps = false; // change this to true if you are using SSL/HTTPS. should be consistent end to end.
+
 // this is insecure to set this env flag - use only for dev testing
 // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
-const proxyTarget = useHttps ? "https://win-machine" : "http://win-machine";
-
-const credentials = { key: privateKey, cert: certificate };
+const proxyTarget = useHttps ? "https://win-machine:8081" : "http://win-machine:8081";
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
 const proxyTestPath = '/decisions'; 
 const actualPathBase = '';
 
@@ -41,19 +39,22 @@ app.use(
       // so network traffic from the Decisions form continues to go through the host/proxy and not be CORS.
       // if you need to try this, you will currently have to ask Decisions for a patch for your version.
       proxyReq.setHeader("x-proxied-from", req.headers.host);
-      if (actualPathBase !== "" && proxyTestPath !== actualPathBase) {
+      if (proxyTestPath !== actualPathBase) {
         // set additional header if the base path of decisions is set, and it is different from the one you are testing for in your proxy.
-        // Self hosted 7 has no path base by default, 
+        // e.g. Self hosted 7 has no path base by default, 
         proxyReq.setHeader("x-proxied-from-path-base", proxyTestPath);
       }
     },
   })
   );
 app.use(express.static("./")); // just tell express to serve the static content here.
-// app.listen(3000); // this test server will run on localhost:3000/
-// app.listen(3443);
 
 httpServer.listen(3000);
 console.log("http: listening at :3000...");
-httpsServer.listen(3443);
-console.log("https: listening at :3443...");
+
+if (useHttps) {
+  const credentials = { key: privateKey, cert: certificate };
+  const httpsServer = useHttps ? https.createServer(credentials, app) : null;
+  httpsServer.listen(3443);
+  console.log("https: listening at :3443...");
+}
