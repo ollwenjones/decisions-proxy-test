@@ -12,9 +12,7 @@ const useHttps = true;
 // process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 const proxyTarget = useHttps ? "https://win-machine" : "http://win-machine:80";
 
-const credentials = { key: privateKey, cert: certificate };
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
 
 app.use(
   "/decisions", // catch all traffic to this-site/decisions
@@ -37,5 +35,10 @@ app.use(express.static("./")); // just tell express to serve the static content 
 
 httpServer.listen(3000);
 console.log("http: listening at :3000...");
-httpsServer.listen(3443);
-console.log("https: listening at :3443...");
+
+if (useHttps) {
+  const credentials = { key: privateKey, cert: certificate };
+  const httpsServer = useHttps ? https.createServer(credentials, app) : null;
+  httpsServer.listen(3443);
+  console.log("https: listening at :3443...");
+}
